@@ -1,0 +1,52 @@
+{% include base_path %}
+
+<section class="page__bibtex">
+  <h3 class="page__bibtex-title">Cite This Post</h3>
+  
+  <div class="bibtex-box">
+    <pre><code>@article{&#123;{{ page.author | slugify | default: "author" }}{{ page.date | date: "%Y" }}{{ page.title | slugify | truncate: 20, "" | remove: "..." }},
+  title = &#123;{{ page.title }}&#125;,
+  author = &#123;{{ page.author | default: "Anonymous" }}&#125;,
+  year = &#123;{{ page.date | date: "%Y" }}&#125;,
+  month = &#123;{{ page.date | date: "%b" }}&#125;,
+  url = &#123;{{ site.url }}{{ base_path }}{{ page.url }}&#125;,
+  note = &#123;Blog post&#125;
+&#125;</code></pre>
+  </div>
+  
+  <button class="btn btn--small btn--copy-bibtex" onclick="copyBibtex()">
+    <i class="fas fa-copy"></i> Copy BibTeX
+  </button>
+</section>
+
+<script>
+function copyBibtex() {
+  const bibtexText = document.querySelector('.bibtex-box code').textContent;
+  
+  // Create temporary textarea
+  const textarea = document.createElement('textarea');
+  textarea.value = bibtexText;
+  textarea.style.position = 'fixed';
+  textarea.style.opacity = '0';
+  document.body.appendChild(textarea);
+  
+  // Select and copy
+  textarea.select();
+  document.execCommand('copy');
+  
+  // Clean up
+  document.body.removeChild(textarea);
+  
+  // Show feedback
+  const button = document.querySelector('.btn--copy-bibtex');
+  const originalText = button.innerHTML;
+  button.innerHTML = '<i class="fas fa-check"></i> Copied!';
+  button.style.backgroundColor = '#62c462';
+  
+  setTimeout(() => {
+    button.innerHTML = originalText;
+    button.style.backgroundColor = '';
+  }, 2000);
+}
+</script>
+

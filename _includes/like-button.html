@@ -1,0 +1,66 @@
+{% include base_path %}
+
+<section class="page__like">
+  <h4 class="page__like-title">Enjoyed this post?</h4>
+  <button id="like-button" class="btn btn--like" onclick="handleLike()">
+    <i class="fas fa-heart" id="heart-icon"></i>
+    <span id="like-text">Like</span>
+    <span id="like-count"></span>
+  </button>
+</section>
+
+<script>
+  // Simple localStorage-based like system
+  const postId = "{{ page.id | default: page.url }}";
+  const likeKey = `liked_${postId}`;
+  const countKey = `likes_${postId}`;
+  
+  function updateLikeButton() {
+    const liked = localStorage.getItem(likeKey) === 'true';
+    const count = parseInt(localStorage.getItem(countKey) || '0');
+    
+    const heartIcon = document.getElementById('heart-icon');
+    const likeText = document.getElementById('like-text');
+    const likeCount = document.getElementById('like-count');
+    const likeButton = document.getElementById('like-button');
+    
+    if (liked) {
+      likeButton.classList.add('liked');
+      likeText.textContent = 'Liked';
+      heartIcon.style.color = '#e74c3c';
+    } else {
+      likeButton.classList.remove('liked');
+      likeText.textContent = 'Like';
+      heartIcon.style.color = '';
+    }
+    
+    if (count > 0) {
+      likeCount.textContent = ` (${count})`;
+    } else {
+      likeCount.textContent = '';
+    }
+  }
+  
+  function handleLike() {
+    const liked = localStorage.getItem(likeKey) === 'true';
+    let count = parseInt(localStorage.getItem(countKey) || '0');
+    
+    if (liked) {
+      // Unlike
+      localStorage.setItem(likeKey, 'false');
+      count = Math.max(0, count - 1);
+      localStorage.setItem(countKey, count.toString());
+    } else {
+      // Like
+      localStorage.setItem(likeKey, 'true');
+      count = count + 1;
+      localStorage.setItem(countKey, count.toString());
+    }
+    
+    updateLikeButton();
+  }
+  
+  // Initialize on page load
+  updateLikeButton();
+</script>
+

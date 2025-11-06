@@ -1,0 +1,13 @@
+{% if page.references %}
+<section class="page__references">
+  <h2 class="page__references-title">References</h2>
+  <ol class="references-list">
+    {% for reference in page.references %}
+    <li class="reference-item">
+      {{ reference | strip }}
+    </li>
+    {% endfor %}
+  </ol>
+</section>
+{% endif %}
+

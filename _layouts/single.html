@@ -27,6 +27,13 @@ layout: default
       {% unless page.header.overlay_color or page.header.overlay_image %}
         <header>
           {% if page.title %}<h1 class="page__title" itemprop="headline">{{ page.title | markdownify | remove: "<p>" | remove: "</p>" }}</h1>{% endif %}
+          {% if page.author or page.reviewer %}
+            <p class="page__byline">
+              {% if page.author %}<span class="page__author">By {{ page.author }}</span>{% endif %}
+              {% if page.author and page.reviewer %} | {% endif %}
+              {% if page.reviewer %}<span class="page__reviewer">Reviewed by {{ page.reviewer }}</span>{% endif %}
+            </p>
+          {% endif %}
           {% if page.read_time %}
             <p class="page__meta"><i class="fa fa-clock" aria-hidden="true"></i> {% include read-time.html %}</p>
           {% endif %}
@@ -82,6 +89,10 @@ layout: default
         {% endif %}
         {% include page__taxonomy.html %}
       </footer>
+
+      {% if page.collection == 'posts' %}{% include bibtex-citation.html %}{% endif %}
+
+      {% include references.html %}
 
       {% if page.share %}{% include social-share.html %}{% endif %}
 
