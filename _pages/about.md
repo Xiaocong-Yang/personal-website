@@ -20,7 +20,7 @@ redirect_from:
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url('/images/reed.jpg');
+  background-image: url('{{ site.baseurl }}/images/reed.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
