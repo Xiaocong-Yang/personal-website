@@ -10,7 +10,7 @@ redirect_from:
 {% include base_path %}
 
 <p style="text-align: center;">
-  <a href="/files/CV_Xiaocong_Yang.pdf" target="_blank" class="btn btn--primary">Download CV (PDF)</a>
+  <a href="{{ base_path }}/files/CV_Xiaocong_Yang.pdf" target="_blank" class="btn btn--primary">Download CV (PDF)</a>
 </p>
 
-<embed src="/files/CV_Xiaocong_Yang.pdf" type="application/pdf" width="100%" height="1000px" />
+<embed src="{{ base_path }}/files/CV_Xiaocong_Yang.pdf" type="application/pdf" width="100%" height="1000px" />
