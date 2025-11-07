@@ -20,33 +20,51 @@
 </section>
 
 <script>
-function copyBibtex() {
+async function copyBibtex() {
   const bibtexText = document.querySelector('.bibtex-box code').textContent;
-  
-  // Create temporary textarea
-  const textarea = document.createElement('textarea');
-  textarea.value = bibtexText;
-  textarea.style.position = 'fixed';
-  textarea.style.opacity = '0';
-  document.body.appendChild(textarea);
-  
-  // Select and copy
-  textarea.select();
-  document.execCommand('copy');
-  
-  // Clean up
-  document.body.removeChild(textarea);
-  
-  // Show feedback
   const button = document.querySelector('.btn--copy-bibtex');
   const originalText = button.innerHTML;
-  button.innerHTML = '<i class="fas fa-check"></i> Copied!';
-  button.style.backgroundColor = '#62c462';
   
-  setTimeout(() => {
-    button.innerHTML = originalText;
-    button.style.backgroundColor = '';
-  }, 2000);
+  try {
+    // Use modern Clipboard API
+    await navigator.clipboard.writeText(bibtexText);
+    
+    // Show success feedback
+    button.innerHTML = '<i class="fas fa-check"></i> Copied!';
+    button.style.backgroundColor = '#62c462';
+    
+    setTimeout(() => {
+      button.innerHTML = originalText;
+      button.style.backgroundColor = '';
+    }, 2000);
+  } catch (err) {
+    // Fallback for older browsers
+    const textarea = document.createElement('textarea');
+    textarea.value = bibtexText;
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.select();
+    
+    try {
+      document.execCommand('copy');
+      button.innerHTML = '<i class="fas fa-check"></i> Copied!';
+      button.style.backgroundColor = '#62c462';
+      setTimeout(() => {
+        button.innerHTML = originalText;
+        button.style.backgroundColor = '';
+      }, 2000);
+    } catch (err) {
+      button.innerHTML = '<i class="fas fa-times"></i> Failed';
+      button.style.backgroundColor = '#e74c3c';
+      setTimeout(() => {
+        button.innerHTML = originalText;
+        button.style.backgroundColor = '';
+      }, 2000);
+    }
+    
+    document.body.removeChild(textarea);
+  }
 }
 </script>
 
