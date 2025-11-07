@@ -4,7 +4,7 @@
   <h3 class="page__bibtex-title">Cite This Post</h3>
   
   <div class="bibtex-box">
-    <pre><code>@article{&#123;{{ page.author | slugify | default: "author" }}{{ page.date | date: "%Y" }}{{ page.title | slugify | truncate: 20, "" | remove: "..." }},
+    <pre><code>@article{&#123;{{ page.author | slugify | default: "author" }}-{{ page.title | slugify }},
   title = &#123;{{ page.title }}&#125;,
   author = &#123;{{ page.author | default: "Anonymous" }}&#125;,
   year = &#123;{{ page.date | date: "%Y" }}&#125;,
