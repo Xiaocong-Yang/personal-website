@@ -6,7 +6,9 @@ reviewer: ''
 permalink: /posts/2025/11/decentralization/
 excerpt: 'This post explores how decentralized information processing plays a key role in almost any Complex Systems, including Neural Networks, Multi-Agent Systems and beyond.'
 tags:
+  - Complex System
   - AI
+  - Philosophy
 references:
   - "Aristotle. (1998). Politics (C. D. C. Reeve, Trans.). Hackett Publishing Company."
   - "Plato. (2004). Republic (C. D. C. Reeve, Trans.). Hackett Publishing Company."
