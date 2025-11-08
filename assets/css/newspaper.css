@@ -333,3 +333,72 @@
   margin-right: 0.5em;
 }
 
+/* Dark mode styles */
+html[data-theme="dark"] .page[itemtype="http://schema.org/CreativeWork"] .page__content {
+  color: #e0e0e0;
+}
+
+html[data-theme="dark"] .page[itemtype="http://schema.org/CreativeWork"] .page__title {
+  color: #fff;
+  border-top-color: #666;
+  border-bottom-color: #666;
+}
+
+html[data-theme="dark"] .page[itemtype="http://schema.org/CreativeWork"] .page__byline {
+  color: #bbb;
+}
+
+html[data-theme="dark"] .page[itemtype="http://schema.org/CreativeWork"] .page__reviewer {
+  color: #999;
+}
+
+html[data-theme="dark"] .page[itemtype="http://schema.org/CreativeWork"] .page__date {
+  color: #999;
+}
+
+html[data-theme="dark"] .page[itemtype="http://schema.org/CreativeWork"] .page__content a {
+  color: #6bb6ff;
+}
+
+html[data-theme="dark"] .page[itemtype="http://schema.org/CreativeWork"] .page__content blockquote {
+  color: #d0d0d0;
+  border-left-color: #555;
+}
+
+html[data-theme="dark"] .page[itemtype="http://schema.org/CreativeWork"] .page__taxonomy {
+  color: #bbb;
+}
+
+html[data-theme="dark"] .page[itemtype="http://schema.org/CreativeWork"] header {
+  border-bottom-color: #555;
+}
+
+html[data-theme="dark"] .page__bibtex-title {
+  color: #e0e0e0;
+}
+
+html[data-theme="dark"] .page__references-title {
+  color: #e0e0e0;
+}
+
+html[data-theme="dark"] .bibtex-box {
+  background: #2a2a2a;
+  border-color: #555;
+}
+
+html[data-theme="dark"] .bibtex-box pre {
+  background: #2a2a2a;
+}
+
+html[data-theme="dark"] .bibtex-box code {
+  color: #e0e0e0;
+}
+
+html[data-theme="dark"] .references-list {
+  color: #d0d0d0;
+}
+
+html[data-theme="dark"] .reference-item {
+  color: #d0d0d0;
+}
+

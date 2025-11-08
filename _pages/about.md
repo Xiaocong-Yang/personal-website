@@ -34,6 +34,7 @@ redirect_from:
   z-index: 1;
 }
 
+/* Light mode styling */
 .page__content h2,
 .page__content p,
 .page__content li,
@@ -45,6 +46,20 @@ redirect_from:
                -1px -1px 3px rgba(255, 255, 255, 0.9),
                1px -1px 3px rgba(255, 255, 255, 0.9),
                -1px 1px 3px rgba(255, 255, 255, 0.9);
+}
+
+/* Dark mode styling */
+html[data-theme="dark"] .page__content h2,
+html[data-theme="dark"] .page__content p,
+html[data-theme="dark"] .page__content li,
+html[data-theme="dark"] .page__content blockquote,
+html[data-theme="dark"] .page__content strong,
+html[data-theme="dark"] .page__content a {
+  color: #fff;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9),
+               -1px -1px 3px rgba(0, 0, 0, 0.9),
+               1px -1px 3px rgba(0, 0, 0, 0.9),
+               -1px 1px 3px rgba(0, 0, 0, 0.9);
 }
 </style>
 
