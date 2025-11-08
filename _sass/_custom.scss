@@ -1,0 +1,43 @@
+/* --- kill the stray divider above the first paragraph --- */
+.page__inner-wrap > header,
+article.page > header {
+  border-bottom: none !important;
+  box-shadow: none !important;
+  padding-bottom: .5rem !important;
+  margin-bottom: 1rem !important;
+}
+.page__inner-wrap > header::after,
+article.page > header::after {
+  display: none !important;
+}
+
+.page__content {
+  padding-top: 1rem !important;
+  background: #fff !important;
+  isolation: isolate;
+  position: relative;
+  z-index: 0;
+}
+
+article.page::before,
+.page__inner-wrap::before,
+.page__content::before {
+  display: none !important;
+}
+
+.page__content, .page__inner-wrap, article.page {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Dark mode tweaks */
+html[data-theme="dark"] .page__inner-wrap > header,
+html[data-theme="dark"] article.page > header {
+  border-bottom: none !important;
+  box-shadow: none !important;
+}
+
+html[data-theme="dark"] .page__content {
+  background: transparent !important;
+}

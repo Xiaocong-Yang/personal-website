@@ -334,8 +334,48 @@
 }
 
 /* Dark mode styles */
+html[data-theme="dark"] .page {
+  background-color: transparent !important;
+}
+
+html[data-theme="dark"] .page[itemtype="http://schema.org/CreativeWork"] {
+  background-color: transparent !important;
+}
+
+html[data-theme="dark"] .page__inner-wrap {
+  background-color: transparent !important;
+}
+
 html[data-theme="dark"] .page[itemtype="http://schema.org/CreativeWork"] .page__content {
   color: #e0e0e0;
+  background-color: transparent !important;
+}
+
+html[data-theme="dark"] .page[itemtype="http://schema.org/CreativeWork"] .page__content p:first-of-type::first-letter {
+  color: #fff;
+}
+
+html[data-theme="dark"] .page[itemtype="http://schema.org/CreativeWork"] .page__content h2 {
+  color: #fff;
+  border-bottom-color: #666;
+}
+
+html[data-theme="dark"] .page[itemtype="http://schema.org/CreativeWork"] .page__content p,
+html[data-theme="dark"] .page[itemtype="http://schema.org/CreativeWork"] .page__content li,
+html[data-theme="dark"] .page[itemtype="http://schema.org/CreativeWork"] .page__content strong,
+html[data-theme="dark"] .page[itemtype="http://schema.org/CreativeWork"] .page__content em,
+html[data-theme="dark"] .page[itemtype="http://schema.org/CreativeWork"] .page__content td,
+html[data-theme="dark"] .page[itemtype="http://schema.org/CreativeWork"] .page__content th {
+  color: #e0e0e0;
+}
+
+html[data-theme="dark"] .page[itemtype="http://schema.org/CreativeWork"] .page__content table {
+  background-color: transparent;
+  border-color: #555;
+}
+
+html[data-theme="dark"] .page[itemtype="http://schema.org/CreativeWork"] .page__content thead {
+  background-color: rgba(255, 255, 255, 0.05);
 }
 
 html[data-theme="dark"] .page[itemtype="http://schema.org/CreativeWork"] .page__title {
@@ -370,7 +410,8 @@ html[data-theme="dark"] .page[itemtype="http://schema.org/CreativeWork"] .page__
 }
 
 html[data-theme="dark"] .page[itemtype="http://schema.org/CreativeWork"] header {
-  border-bottom-color: #555;
+  border-bottom: none;
+  background-color: transparent !important;
 }
 
 html[data-theme="dark"] .page__bibtex-title {
