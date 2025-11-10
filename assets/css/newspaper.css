@@ -62,9 +62,9 @@
 }
 
 .page[itemtype="http://schema.org/CreativeWork"] header {
-  border-bottom: 1px solid #000;
+  border-bottom: none;
   padding-bottom: 1.5em;
-  margin-bottom: 2em;
+  margin-bottom: 2.5em;
   text-align: center;
 }
 

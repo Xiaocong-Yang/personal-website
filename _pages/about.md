@@ -13,6 +13,13 @@ redirect_from:
   min-height: 100vh;
 }
 
+.page,
+.page__inner-wrap,
+.page__content {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
 .page::before {
   content: '';
   position: fixed;
@@ -42,10 +49,6 @@ redirect_from:
 .page__content strong,
 .page__content a {
   color: #222;
-  text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.9),
-               -1px -1px 3px rgba(255, 255, 255, 0.9),
-               1px -1px 3px rgba(255, 255, 255, 0.9),
-               -1px 1px 3px rgba(255, 255, 255, 0.9);
 }
 
 /* Dark mode styling */
@@ -56,10 +59,6 @@ html[data-theme="dark"] .page__content blockquote,
 html[data-theme="dark"] .page__content strong,
 html[data-theme="dark"] .page__content a {
   color: #fff;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9),
-               -1px -1px 3px rgba(0, 0, 0, 0.9),
-               1px -1px 3px rgba(0, 0, 0, 0.9),
-               -1px 1px 3px rgba(0, 0, 0, 0.9);
 }
 </style>
 
