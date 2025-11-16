@@ -2,7 +2,6 @@
 title: 'Neuro-Symbolic Systems: The Art of Compromise'
 date: 2025-11-15
 author: 'Xiaocong Yang'
-reviewer: ''
 permalink: /posts/2025/11/symbolic-system/
 excerpt: 'Neuro-symbolic intelligence emerges from fusing two complementary modes of information compression — the continuous, gradient-based smoothness of neural systems and the discrete, rule-based precision of symbolic systems.'
 tags:
