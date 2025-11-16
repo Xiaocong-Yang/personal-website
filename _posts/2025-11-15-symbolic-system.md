@@ -51,7 +51,7 @@ When we introduce symbols like “duty of care”, “threat of violence”, or 
 
 By contrast, a purely neural compression lives entirely inside the model. Its latent axes are unnamed, its geometry is private, and its content can drift as training data or fine-tuning objectives change. Such a representation is excellent for generalization, but poor as a locus of obligation. It is hard to say, in that space alone, what the system *owes* to anyone, or which distinctions it is supposed to treat as invariant. In other words, **neural compression serves prediction, while symbolic compression serves alignment with a human normative frame**.
 
-Once you see symbolic systems as alignment maps rather than mere rule lists, the connection to *accountability* becomes direct. To say “the model must not discriminate on protected attributes”, or “the model must apply a duty-of-care standard”, is to insist that certain symbolic distinctions be reflected, in a stable way, inside its internal concept space — and that we be able to locate, probe, and, if necessary, correct those reflections. 
+Once you see symbolic systems as alignment maps rather than mere rule lists, the connection to *accountability* becomes direct. To say “the model must not discriminate on protected attributes”, or “the model must apply a duty-of-care standard”, is to insist that certain symbolic distinctions be reflected, in a stable way, inside its internal concept space — and that we be able to locate, probe, and, if necessary, correct those reflections. And this accountability is usually desired, even at the cost of compromising part of the model capability.
 
 
 ## The Challenge of Scalability ##
