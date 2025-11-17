@@ -8,6 +8,12 @@ tags:
   - AI
   - Philosophy
 references: 
+  - "Bloom, J., Elhage, N., Nanda, N., Heimersheim, S., & Ngo, R. (2024). Scaling monosemanticity: Sparse autoencoders and language models. Anthropic."
+  - "Garcez, A. d’Avila, Gori, M., Lamb, L. C., Serafini, L., Spranger, M., & Tran, S. N. (2019). Neural-symbolic computing: An effective methodology for principled integration of machine learning and reasoning. FLAIRS Conference Proceedings, 32, 1–6."
+  - "Bartlett, P. L., Foster, D. J., & Telgarsky, M. (2017). Spectrally-normalized margin bounds for neural networks. Advances in Neural Information Processing Systems, 30, 6241–6250."
+  - "Chiang, T. (2023, February 9). ChatGPT is a blurry JPEG of the Web. The New Yorker."
+  - "Pearl, J. (2009). Causality: Models, reasoning, and inference (2nd ed.). Cambridge University Press."
+  - "Donoghue v Stevenson [1932] AC 562 (HL)."
 
 share: true
 comments: true
@@ -27,7 +33,7 @@ Symbolic systems compress by **discretization**. They carve the continuous fabri
 
 Neural networks, in contrast, compress by **smoothing**. They forgo discrete categories in favor of smooth manifolds where nearby inputs yield similar activations (usually bounded by some Lipschitz constant in modern LLMs). Rather than mapping data to predefined coordinates, they learn a latent geometry that encodes correlations implicitly. The world, in this view, is not a set of rules but a field of gradients. This makes neural representations remarkably adaptive: they can interpolate, analogize, and generalize across unseen examples. But the same smoothness that grants flexibility also breeds opacity. Information is entangled, semantics become distributed, and interpretability is lost in the very act of generalization. 
 
-In conclusion, we can summarize the difference between the two systems from the information compression perspective in one sentence: "***Neural Networks are blurry images of the world, while symbolic systems are high-resolution pictures with missing patches.***" This also indicates the first and apparent reason why neuro-symbolic systems are the art of compromise: they can harness the knowledge from both systems by using them collaboratively at different scales. But is that all?
+In conclusion, we can summarize the difference between the two systems from the information compression perspective in one sentence: "***Neural Networks are blurry images of the world, while symbolic systems are high-resolution pictures with missing patches.***" This actually indicates the reason why neuro-symbolic systems are an art of compromise: they can harness knowledge from both paradigms by using them collaboratively at different scales, with neural networks providing a global, low-resolution backbone and symbolic components supplying high-resolution local details.
 
 
 | **Property**              | **Symbolic Systems**                      | **Neural Networks**                        |
@@ -38,20 +44,6 @@ In conclusion, we can summarize the difference between the two systems from the 
 | **Error Mode**             | Missed facts *(coverage gaps)*           | Smoothed facts *(hallucinations)*          |
 | **Interpretability**       | High                                     | Low                                        |
 
-
-## Symbolic-System Based Compression as an Alignment Process ##
-
-Let's take a slightly different view. While neural networks compress the world into some highly abstract, continuous manifolds, *symbolic systems compress it into a human-defined space with semantically meaningful axes along which the system's behaviors can be judged*. From this perspective, compressing information into the symbolic space is an **alignment process**, where a messy, high-dimensional world is projected onto a space whose coordinates reflect human concepts, interests, and values.
-
-When we introduce symbols like “duty of care”, “threat of violence”, or “protected attribute” into a symbolic system, we are not just inventing labels. This compression process does three things at once:
-
-- It selects which aspects of the world the system is **obliged to care about** (and which it is allowed to ignore).
-- It creates a **shared vocabulary** so that different stakeholders can reliably point to “the same thing” in disputes and audits.
-- It turns those symbols into **commitment points**: once written down, they can be cited, challenged, and reinterpreted, but not quietly erased.
-
-By contrast, a purely neural compression lives entirely inside the model. Its latent axes are unnamed, its geometry is private, and its content can drift as training data or fine-tuning objectives change. Such a representation is excellent for generalization, but poor as a locus of obligation. It is hard to say, in that space alone, what the system *owes* to anyone, or which distinctions it is supposed to treat as invariant. In other words, **neural compression serves prediction, while symbolic compression serves alignment with a human normative frame**.
-
-Once you see symbolic systems as alignment maps rather than mere rule lists, the connection to *accountability* becomes direct. To say “the model must not discriminate on protected attributes”, or “the model must apply a duty-of-care standard”, is to insist that certain symbolic distinctions be reflected, in a stable way, inside its internal concept space — and that we be able to locate, probe, and, if necessary, correct those reflections. And this accountability is usually desired, even at the cost of compromising part of the model capability.
 
 
 ## The Challenge of Scalability ##
@@ -68,13 +60,13 @@ $$
 
 
 
-Here $D$ is called the *dictionary matrix* where each column stores a semantically meaningful concept; the first term is the *reconstruction loss* of the hidden state $h$, while the second is a *sparsity penalty* encouraging minimal activated neurons in the code. See the [posts](https://transformer-circuits.pub/2024/scaling-monosemanticity/) from Anthropic for details about SAE training and usage. 
+Here $D$ is called the *dictionary matrix* where each column stores a semantically meaningful concept; the first term is the *reconstruction loss* of the hidden state $h$, while the second is a *sparsity penalty* encouraging minimal activated neurons in the code. See the [post](https://transformer-circuits.pub/2024/scaling-monosemanticity/) from Anthropic for details about SAE training and usage. 
 
 However, an SAE-only approach runs into two fundamental issues. The first is computational: using SAEs as a live symbolic layer would require multiplying every hidden state by an enormous dictionary matrix, paying a dense computation cost even if the resulting code is sparse. This makes them impossible for deployment at Foundation Model scales. The second is conceptual: SAE features are symbol-like representations, but they are not a symbolic system -- they lack an explicit formal language, compositional operators, and executable rules. **They tell us what concepts exist in the model’s latent space, but not how to reason with them.**
 
 This does not mean we should abandon SAEs altogether — they provide ingredients, not a finished meal. Rather than asking SAEs to be the symbolic system, we can treat them as a bridge between the model’s internal concept space and the many symbolic artefacts we already have: knowledge graphs, ontologies, rule bases, taxonomies, where reasoning can happen by definition. And a high-quality SAE trained on a large model’s hidden states then becomes a shared “concept coordinate system”: different symbolic systems can then be aligned within this coordinate system by associating their symbols with the SAE features that are consistently activated when those symbols are invoked in context.
 
-Doing this has several advantages over simply placing symbolic systems side by side and querying them independently. First, it enables **symbol merging and aliasing across systems**: if two symbols from different formalisms repeatedly light up almost the same set of SAE features, we have strong evidence that they correspond to the same underlying neural concept, and can be linked or even unified. Second, it supports **cross-system relation discovery**: symbols that are far apart in our hand-designed schemas but consistently close in SAE space point to bridges we failed to encode — new relations, abstractions, or mappings between domains. Third, SAE activations give us a model-centric notion of **salience**: symbols that never find a clear counterpart in the neural concept space are candidates for pruning or refactoring, while strong SAE features with no matching symbol in any system highlight blind spots shared by all of our current abstractions.
+Doing this has several advantages over simply placing symbolic systems side by side and querying them independently. First, it enables **symbol merging and aliasing across systems**: if two symbols from different formalisms repeatedly light up almost the same set of SAE features, we have strong evidence that they correspond to the same underlying neural concept, and can be linked or even unified. Second, it supports **cross-system relation discovery**: symbols that are far apart in our hand-designed schemas but consistently close in SAE space point to bridges we failed to encode — new relations, abstractions, or mappings between domains. Third, SAE activations give us a model-centric notion of salience: symbols that never find a clear counterpart in the neural concept space are candidates for pruning or refactoring, while strong SAE features with no matching symbol in any system highlight blind spots shared by all of our current abstractions.
 
 Crucially, this use of SAEs remains scalable. The expensive SAE is trained offline, and the symbolic systems themselves do not need to grow to “Foundation Model size” — they can remain as small or as large as their respective tasks require. At inference time, the neural network continues to do the heavy lifting in its continuous latent space; the symbolic artefacts only shape, constrain, or audit behaviour at the points where explicit structure and accountability are most valuable. SAEs help by tying all these heterogeneous symbolic views back to a single learned conceptual map of the model, making it possible to compare, align, and improve them without ever constructing a monolithic, expert-designed symbolic twin.
 
@@ -110,10 +102,22 @@ A feature is only interesting, as part of a bridge, if it actually influences th
 
 Formally, amplifying or suppressing a feature is an intervention of the form $\text{do}(z_j = c)$ in the causal sense, where we overwrite that internal variable and rerun the computation. But unlike classical causal inference modeling, we do not really need Pearl’s *do-calculus* to identify $P(y \mid \text{do}(z_j))$. The neural network is a **fully observable and intervenable system**, so we can simply execute the intervention and observe the new output. In this sense, neural networks give us the luxury of performing idealized interventions that are impossible in most real-world social or economic systems.
 
-It is straightforward to execute the intervention in the SAE layer. SAE reconstructs the residual stream by a linear combination of a few features, therefore, we can simply increase or decrease the value of their coefficients, without introducing any effects on other features. 
+It is straightforward to execute the intervention in the SAE layer. SAE reconstructs the residual stream by a **linear combination** of a few features, therefore, we can simply increase or decrease the value of their coefficients, without introducing any effects on other features. See the [post](https://transformer-circuits.pub/2024/scaling-monosemanticity/) from Anthropic about their implementation.
 
 
+## Symbolic-System Based Compression as an Alignment Process ##
 
+Now let's take a slightly different view. While neural networks compress the world into some highly abstract, continuous manifolds, *symbolic systems compress it into a human-defined space with semantically meaningful axes along which the system's behaviors can be judged*. From this perspective, compressing information into the symbolic space is an **alignment process**, where a messy, high-dimensional world is projected onto a space whose coordinates reflect human concepts, interests, and values.
+
+When we introduce symbols like “duty of care”, “threat of violence”, or “protected attribute” into a symbolic system, we are not just inventing labels. This compression process does three things at once:
+
+- It selects which aspects of the world the system is **obliged to care about** (and which it is supported to ignore).
+- It creates a **shared vocabulary** so that different stakeholders can reliably point to “the same thing” in disputes and audits.
+- It turns those symbols into **commitment points**: once written down, they can be cited, challenged, and reinterpreted, but not quietly erased.
+
+By contrast, a purely neural compression lives entirely inside the model. Its latent axes are unnamed, its geometry is private, and its content can drift as training data or fine-tuning objectives change. Such a representation is excellent for generalization, but poor as a locus of obligation. It is hard to say, in that space alone, what the system *owes* to anyone, or which distinctions it is supposed to treat as invariant. In other words, **neural compression serves prediction, while symbolic compression serves alignment with a human normative frame**.
+
+Once you see symbolic systems as alignment maps rather than mere rule lists, the connection to *accountability* becomes direct. To say “the model must not discriminate on protected attributes”, or “the model must apply a duty-of-care standard”, is to insist that certain symbolic distinctions be reflected, in a stable way, inside its internal concept space — and that we be able to locate, probe, and, if necessary, correct those reflections. And this accountability is usually desired, even at the cost of compromising part of the model capability.
 
 
 ## From Hidden Law to Shared Symbols — On the Ethics of Transparency ##
