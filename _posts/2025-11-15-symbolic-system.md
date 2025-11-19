@@ -2,6 +2,7 @@
 title: 'Neuro-Symbolic Systems: The Art of Compromise'
 date: 2025-11-15
 author: 'Xiaocong Yang'
+reviewer: 'Daniel Elliott'
 permalink: /posts/2025/11/symbolic-system/
 excerpt: "Neuro-symbolic intelligence arises from fusing two complementary compression engines: neural networks that blur reality into continuous manifolds, and symbolic systems that carve it into sharp, rule-based distinctions."
 description: "Examines neuro-symbolic systems as a bridge between neural networks and symbolic reasoning, highlighting interpretability trade-offs."
