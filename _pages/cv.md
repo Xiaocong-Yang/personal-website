@@ -5,6 +5,7 @@ permalink: /cv/
 author_profile: true
 redirect_from:
   - /resume
+description: "Curriculum vitae for Xiaocong Yang, including academic background, publications, and research experience in AI interpretability."
 ---
 
 {% include base_path %}
