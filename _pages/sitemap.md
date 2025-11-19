@@ -3,6 +3,8 @@ layout: archive
 title: "Sitemap"
 permalink: /sitemap/
 author_profile: true
+description: "Comprehensive sitemap for Xiaocong Yang's website linking to every page, post, and collection."
+keywords: "sitemap, Xiaocong Yang, site index"
 ---
 
 {% include base_path %}

@@ -5,6 +5,8 @@ permalink: /cv-json/
 author_profile: false
 redirect_from:
   - /resume-json
+description: "Machine-readable CV for Xiaocong Yang with download links for PDF and Markdown formats."
+keywords: "Xiaocong Yang CV, JSON resume, AI interpretability researcher"
 ---
 
 {% include base_path %}

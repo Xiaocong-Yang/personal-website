@@ -2,6 +2,8 @@
 title: "Archive Layout with Content"
 layout: archive
 permalink: /archive-layout-with-content/
+description: "Demonstration page showcasing archive layouts, typography, and Markdown styling used across Xiaocong Yang's site."
+keywords: "archive layout, markdown examples, Xiaocong Yang"
 ---
 
 A variety of common markup showing how the theme styles them.

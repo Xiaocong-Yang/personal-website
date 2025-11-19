@@ -6,6 +6,7 @@ redirect_from:
   - /about/
   - /about.html
 description: "Homepage for Xiaocong Yang, CS PhD student at UIUC focusing on AI interpretability and symbolic reasoning."
+keywords: "Xiaocong Yang, AI interpretability, symbolic reasoning, UIUC"
 ---
 
 <style>

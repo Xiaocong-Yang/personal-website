@@ -5,6 +5,8 @@ author_profile: true
 redirect_from: 
   - /md/
   - /markdown.html
+description: "Reference guide to Markdown, MathJax, Mermaid, and Plotly features supported on Xiaocong Yang's site."
+keywords: "Markdown guide, MathJax support, Xiaocong Yang website"
 ---
 
 {% include toc %}

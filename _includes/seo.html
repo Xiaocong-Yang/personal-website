@@ -26,6 +26,17 @@
 {% endif %}
 <meta name="description" content="{{ seo_description }}">
 
+{% assign seo_keywords = nil %}
+{% if page.keywords %}
+  {% assign seo_keywords = page.keywords %}
+{% elsif page.tags %}
+  {% assign seo_keywords = page.tags | join: ", " %}
+{% endif %}
+{% if seo_keywords %}
+  {% assign seo_keywords = seo_keywords | strip_html | strip_newlines | escape_once %}
+  <meta name="keywords" content="{{ seo_keywords }}">
+{% endif %}
+
 {% assign seo_author = page.author | default: page.author[0] | default: site.author[0] %}
 {% if seo_author %}
   {% if seo_author.twitter %}

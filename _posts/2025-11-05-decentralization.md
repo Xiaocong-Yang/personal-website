@@ -5,6 +5,8 @@ author: 'Xiaocong Yang'
 reviewer: 'Daniel Elliott'
 permalink: /posts/2025/11/decentralization/
 excerpt: 'This post explores how decentralized information processing plays a key role in almost any Complex Systems, including Neural Networks, Multi-Agent Systems and beyond.'
+description: "Explores how decentralized information processing shapes complex systems in biology, economics, and modern AI."
+keywords: "decentralization, complex systems, AI interpretability, Xiaocong Yang"
 tags:
   - Complex System
   - AI

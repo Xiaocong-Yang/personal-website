@@ -2,6 +2,8 @@
 permalink: /terms/
 title: "Terms and Privacy Policy"
 modified: 2016-06-06
+description: "Terms of use and privacy policy outlining how Xiaocong Yang's website collects, stores, and protects visitor data."
+keywords: "privacy policy, terms of use, Xiaocong Yang website"
 ---
 
 {% include base_path %}
