@@ -33,11 +33,9 @@ To answer the question above, we need to take a closer look at both systems. Fro
 
 In essence, both paradigms can be imagined as filters applied to raw reality. Given input $X$, each learns or defines a transformation $H(\cdot)$ that yields a compressed representation $Y = H(X)$, preserving information that it considers meaningful and discarding the rest. But the shape of this filtering is different. Generally speaking, symbolic systems behave like **high-pass filters** — they extract the sharp, rule-defining contours of the world while ignoring its smooth gradients. Neural networks, by contrast, resemble **low-pass filters**, smoothing local fluctuations to capture global structure. The difference is not in what they see, but in what they choose to forget.
 
-Symbolic systems compress by **discretization**. They carve the continuous fabric of experience into distinct categories, relations, and rules: a legal code, a grammar or an ontology. Each symbol acts as a *crisp boundary*, a handle for manipulation within a pre-defined schema. The process resembles projecting a noisy signal onto a set of human-designed basis vectors — a space spanned by concepts such as Entity and Relation. A knowledge graph, for instance, might read the sentence “UIUC is the best engineering university in the universe and I love it”, and retain only *(UIUC, is_a, Institution)*, discarding everything that falls outside its schema. The result is clarity and composability, but also rigidity: meaning outside the ontological frame simply evaporates. 
+Symbolic systems compress by **discretization**. They carve the continuous fabric of experience into distinct categories, relations, and rules: a legal code, a grammar or an ontology. Each symbol acts as a *crisp boundary*, a handle for manipulation within a pre-defined schema. The process resembles projecting a noisy signal onto a set of human-designed basis vectors — a space spanned by concepts such as Entity and Relation. A knowledge graph, for instance, might read the sentence “UIUC is an extraordinary university and I love it”, and retain only *(UIUC, is_a, Institution)*, discarding everything that falls outside its schema. The result is clarity and composability, but also rigidity: meaning outside the ontological frame simply evaporates. 
 
 Neural networks, in contrast, compress by **smoothing**. They forgo discrete categories in favor of smooth manifolds where nearby inputs yield similar activations (usually bounded by some Lipschitz constant in modern LLMs). Rather than mapping data to predefined coordinates, they learn a latent geometry that encodes correlations implicitly. The world, in this view, is not a set of rules but a field of gradients. This makes neural representations remarkably adaptive: they can interpolate, analogize, and generalize across unseen examples. But the same smoothness that grants flexibility also breeds opacity. Information is entangled, semantics become distributed, and interpretability is lost in the very act of generalization. 
-
-In conclusion, we can summarize the difference between the two systems from the information compression perspective in one sentence: "***Neural Networks are blurry images of the world, while symbolic systems are high-resolution pictures with missing patches.***" This actually indicates the reason why neuro-symbolic systems are an art of compromise: they can harness knowledge from both paradigms by using them collaboratively at different scales, with neural networks providing a global, low-resolution backbone and symbolic components supplying high-resolution local details.
 
 
 | **Property**              | **Symbolic Systems**                      | **Neural Networks**                        |
@@ -47,6 +45,17 @@ In conclusion, we can summarize the difference between the two systems from the 
 | **Robustness**             | Brittle at rule edges                    | Locally robust but globally fuzzy          |
 | **Error Mode**             | Missed facts *(coverage gaps)*           | Smoothed facts *(hallucinations)*          |
 | **Interpretability**       | High                                     | Low                                        |
+
+
+In conclusion, we can summarize the difference between the two systems from the information compression perspective in one sentence: "***Neural Networks are blurry images of the world, while symbolic systems are high-resolution pictures with missing patches.***" This actually indicates the reason why neuro-symbolic systems are an art of compromise: they can harness knowledge from both paradigms by using them collaboratively at different scales, with neural networks providing a global, low-resolution backbone and symbolic components supplying high-resolution local details.
+
+<figure style="margin:2rem auto;text-align:center;">
+  <img src="{{ site.baseurl }}/images/compression.png"
+       alt="Counterfactual intervention diagram"
+       style="display:block;width:100%;max-width:960px;margin:0 auto;border:none;box-shadow:none;">
+</figure>
+
+
 
 
 
@@ -65,6 +74,12 @@ $$
 
 
 Here $D$ is called the *dictionary matrix* where each column stores a semantically meaningful concept; the first term is the *reconstruction loss* of the hidden state $h$, while the second is a *sparsity penalty* encouraging minimal activated neurons in the code. See the [post](https://transformer-circuits.pub/2024/scaling-monosemanticity/) from Anthropic for details about SAE training and usage. 
+
+<figure style="margin:2rem auto;text-align:center;">
+  <img src="{{ site.baseurl }}/images/SAE.png"
+       alt="SAE diagram"
+       style="display:block;width:80%;max-width:720px;margin:0 auto;border:none;box-shadow:none;">
+</figure>
 
 However, an SAE-only approach runs into two fundamental issues. The first is computational: using SAEs as a live symbolic layer would require multiplying every hidden state by an enormous dictionary matrix, paying a dense computation cost even if the resulting code is sparse. This makes them impossible for deployment at Foundation Model scales. The second is conceptual: SAE features are symbol-like representations, but they are not a symbolic system -- they lack an explicit formal language, compositional operators, and executable rules. **They tell us what concepts exist in the model’s latent space, but not how to reason with them.**
 
@@ -100,13 +115,20 @@ SAE defines an *overcomplete* (redundant) dictionary to store possible features 
 
 Interpretable features then play a more focused role: they provide **human-facing anchors** inside this activation geometry. If a particular feature has a reasonably accurate description, all symbols that load heavily on it inherit a shared semantic hint (e.g. “these are all duty-of-care-like things”), making it easier to inspect, debug, and organize the merged symbolic space. In other words, we do not need a perfect, fully named dictionary. We need (i) enough capacity so that important concepts can get their own directions, and (ii) a sizeable, behaviorally relevant subset of features whose approximate meanings are stable enough to serve as anchors. The rest of the overcomplete code can remain as anonymous background; it still contributes to distances and clusters in the SAE space, even if we never name it.
 
+
 ### Behavioral Relevance via Counterfactuals ### 
 
-A feature is only interesting, as part of a bridge, if it actually influences the model's behavior — not just if it correlates with a pattern in the data. In causal terms, we care about whether the feature lies on a *causal path* in the network’s computation from input to output: if we change the feature while holding everything else fixed, does the model’s behaviour change in the way that its believed meaning would predict?
+A feature is only interesting, as part of a bridge, if it actually influences the model's behavior — not just if it correlates with a pattern in the data. In causal terms, we care about whether the feature lies on a *causal path* in the network’s computation from input to output: if we perturb the feature while holding everything else fixed, does the model’s behaviour change in the way that its believed meaning would predict?
 
-Formally, amplifying or suppressing a feature is an intervention of the form $\text{do}(z_j = c)$ in the causal sense, where we overwrite that internal variable and rerun the computation. But unlike classical causal inference modeling, we do not really need Pearl’s *do-calculus* to identify $P(y \mid \text{do}(z_j))$. The neural network is a **fully observable and intervenable system**, so we can simply execute the intervention and observe the new output. In this sense, neural networks give us the luxury of performing idealized interventions that are impossible in most real-world social or economic systems.
+Formally, changing a feature is similar to an intervention of the form $\text{do}(z = c)$ in the causal sense, where we overwrite that internal variable and rerun the computation. But unlike classical causal inference modeling, we do not really need Pearl’s *do-calculus* to identify $P(y \mid \text{do}(z))$. The neural network is a **fully observable and intervenable system**, so we can simply execute the intervention on the internal nodes and observe the new output. In this sense, neural networks give us the luxury of performing idealized interventions that are impossible in most real-world social or economic systems.
 
-It is straightforward to execute the intervention in the SAE layer. SAE reconstructs the residual stream by a **linear combination** of a few features, therefore, we can simply increase or decrease the value of their coefficients, without introducing any effects on other features. See the [post](https://transformer-circuits.pub/2024/scaling-monosemanticity/) from Anthropic about their implementation.
+Intervening on SAE features is conceptually similar but implemented differently. We typically do not know the meaning of an arbitrary value in the feature space, so the *hard intervention* mentioned above may not be meaningful. Instead, we amplify or suppress the magnitude of an existing feature, which behaves more like a *soft intervention*: the structural graph is left untouched, but the feature’s effective influence is modified. Because SAE reconstructs hidden activations as a linear combination of a small number of semantically meaningful features, we can change the coefficients of those features to implement meaningful, localized interventions without affecting other features.  See the [post](https://transformer-circuits.pub/2024/scaling-monosemanticity/) from Anthropic about their implementation.
+
+<figure style="margin:2rem auto;text-align:center;">
+  <img src="{{ site.baseurl }}/images/causal.png"
+       alt="Counterfactual intervention diagram"
+       style="display:block;width:100%;max-width:960px;margin:0 auto;border:none;box-shadow:none;">
+</figure>
 
 
 ## Symbolic-System Based Compression as an Alignment Process ##
