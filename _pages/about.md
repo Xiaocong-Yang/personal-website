@@ -80,6 +80,13 @@ My research at [AI Interpretability @ Illinois](https://interpretability.web.ill
 If you'd like to reserve a time to discuss, please choose a slot below.
 
 {% if site.calendar_booking_url %}
-<div class="calendly-inline-widget" data-url="{{ site.calendar_booking_url }}" style="min-width:320px;height:720px;"></div>
-<script async src="https://assets.calendly.com/assets/external/widget.js"></script>
+<iframe
+  src="{{ site.calendar_booking_url }}"
+  style="border:0;width:100%;min-height:720px;"
+  frameborder="0"
+  scrolling="no"
+  title="Appointment Schedule"
+></iframe>
+{% else %}
+<p>Please set <code>calendar_booking_url</code> in <code>/_config.yml</code> to your Google Appointment Schedules booking link.</p>
 {% endif %}
