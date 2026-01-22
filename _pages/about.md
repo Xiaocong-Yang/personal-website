@@ -74,3 +74,12 @@ My research at [AI Interpretability @ Illinois](https://interpretability.web.ill
 
 - **Structural Interpretability of AI Models:** I study the organization of knowledge and computational mechanisms within AI models, borrowing core principles from biological intelligence—such as modularity, functional specialization, and sparse activation—to design architectures whose computation can be understood and regulated with brain-like efficiency.
 - **Behavioral Interpretability of AI Agents:** I work on autonomous and self-evolving agents that learn on the fly through continual interaction with changing environments. A self-reflective, continuously updated memory module allows the agent to integrate past experiences, representing a key step toward "System-2 thinking"; while modeling collaboration and competition in multi-agent frameworks can induce Pareto-efficient systems that resemble competitive economic markets.
+
+## Availability
+
+If you'd like to reserve a time to discuss, please choose a slot below.
+
+{% if site.calendar_booking_url %}
+<div class="calendly-inline-widget" data-url="{{ site.calendar_booking_url }}" style="min-width:320px;height:720px;"></div>
+<script async src="https://assets.calendly.com/assets/external/widget.js"></script>
+{% endif %}

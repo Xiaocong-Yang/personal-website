@@ -57,3 +57,58 @@ body.home .page__content strong,
 body.home .page__content a {
   text-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
 }
+
+/* Silence collection: classical, literature-inspired styling */
+.page--silence .page__title,
+.page--silence .page__content,
+.silence-archive {
+  font-family: "Noto Serif SC", "Noto Serif TC", "Songti SC", "STSong", "SimSun", "PMingLiU", Georgia, "Times New Roman", serif;
+  letter-spacing: 0.02em;
+}
+
+.page--silence .page__title {
+  font-weight: 500;
+  letter-spacing: 0.06em;
+}
+
+.page--silence .page__content {
+  font-size: 1.05em;
+  line-height: 1.85;
+  max-width: 42em;
+}
+
+.page--silence .page__content p {
+  margin: 0 0 1.1em;
+}
+
+.page--silence .page__content blockquote {
+  border-left: 2px solid rgba(0, 0, 0, 0.18);
+  background: rgba(0, 0, 0, 0.03);
+  margin: 1.4em 0;
+  padding: 0.6em 1em;
+}
+
+.page--silence .page__content blockquote p {
+  margin: 0.35em 0;
+}
+
+.silence-archive .archive__item-title {
+  font-size: 1.35em;
+  margin-top: 1.2em;
+}
+
+.silence-archive .archive__item-excerpt {
+  font-size: 0.98em;
+  line-height: 1.7;
+  margin-top: 0.35em;
+}
+
+.silence-archive .page__date,
+.silence-archive .page__meta {
+  opacity: 0.7;
+}
+
+html[data-theme="dark"] .page--silence .page__content blockquote {
+  border-left-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.04);
+}

@@ -1,0 +1,82 @@
+---
+layout: archive
+title: "Silence / 微言大义"
+permalink: /silence/
+author_profile: true
+description: "Literature works by Xiaocong Yang, including essays, fragments, and short pieces."
+keywords: "literature, essays, fragments, Xiaocong Yang"
+---
+
+{% include base_path %}
+
+<style>
+  .page {
+    position: relative;
+    min-height: 100vh;
+  }
+  
+  .page,
+  .page__inner-wrap,
+  .page__content {
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+  
+  .page::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('{{ site.baseurl }}/images/reed.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.12;
+    z-index: -2;
+  }
+  
+  .page__content {
+    position: relative;
+    padding: 2em;
+    z-index: 1;
+  }
+  
+  /* Light mode styling */
+  .page__content h2,
+  .page__content p,
+  .page__content li,
+  .page__content blockquote,
+  .page__content strong,
+  .page__content a {
+    color: #222;
+  }
+  
+  /* Dark mode styling */
+  html[data-theme="dark"] .page__content h2,
+  html[data-theme="dark"] .page__content p,
+  html[data-theme="dark"] .page__content li,
+  html[data-theme="dark"] .page__content blockquote,
+  html[data-theme="dark"] .page__content strong,
+  html[data-theme="dark"] .page__content a {
+    color: #fff;
+  }
+</style>
+
+<div class="silence-archive">
+  <div class="page__content">
+  <p><i> 辞约而旨丰，事近而喻远。</i> -- 刘勰《文心雕龙》
+    <br>
+    The ability to express complex ideas in minimal words, is probably one of the most important skills in the era of information explosion. This page servers as a gym for practicing this skill by commenting on famous quotes in philosophy, literature, and history.
+  </p>
+  </div>
+
+  {% if site.silence.size == 0 %}
+  <p>New works will appear here soon.</p>
+  {% else %}
+  {% for post in site.silence reversed %}
+    {% include archive-single.html %}
+  {% endfor %}
+  {% endif %}
+</div>
