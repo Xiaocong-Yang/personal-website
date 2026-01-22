@@ -80,13 +80,11 @@ My research at [AI Interpretability @ Illinois](https://interpretability.web.ill
 If you'd like to reserve a time to discuss, please choose a slot below.
 
 {% if site.calendar_booking_url %}
-<iframe
-  src="{{ site.calendar_booking_url }}"
-  style="border:0;width:100%;min-height:720px;"
-  frameborder="0"
-  scrolling="no"
-  title="Appointment Schedule"
-></iframe>
+<p>
+  <a class="btn" href="{{ site.calendar_booking_url }}" target="_blank" rel="noopener">
+    Open appointment schedule
+  </a>
+</p>
 {% else %}
 <p>Please set <code>calendar_booking_url</code> in <code>/_config.yml</code> to your Google Appointment Schedules booking link.</p>
 {% endif %}
