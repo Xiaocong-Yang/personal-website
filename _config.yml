@@ -12,7 +12,7 @@ site_theme               : "default" # Currently available options are "default"
 title                    : "Xiaocong Yang"
 title_separator          : "-"
 name                     : &name "Xiaocong Yang @ UIUC"
-description              : &description "CS PhD student at UIUC. Team leader of AI Interpretability @ Illinois."   # Update this with a general description of your site, this is the default if not overridden by a page
+description              : &description "CS PhD student at UIUC, advised by Prof. ChengXiang Zhai. Team leader of AI Interpretability @ Illinois."   # Update this with a general description of your site, this is the default if not overridden by a page
 url                      : https://xiaocong-yang.github.io # The base hostname & protocol for your site e.g. "https://[your GitHub username].github.io",
                                                           # or if you already have some other page hosted on Github then use "https://[your GitHub username].github.io/[Your Repo Name]"
 baseurl                  : "/personal-website" # the subpath of your site, e.g. "/blog"
@@ -29,7 +29,7 @@ author:
   avatar           : "xiaocong.jpg"
   name             : "Xiaocong Yang"
   pronouns         : "He/Him/His"
-  bio              : "CS PhD student at UIUC. Team leader of <a href='https://interpretability.web.illinois.edu/'>AI Interpretability @ Illinois</a>."
+  bio              : "CS PhD student at UIUC, advised by <a href='https://czhai.cs.illinois.edu/' target='_blank' rel='noopener'>Prof. ChengXiang Zhai</a>. Team leader of <a href='https://interpretability.web.illinois.edu/'>AI Interpretability @ Illinois</a>."
   location         : "Urbana, IL, USA"
   employer         : "UIUC"
   uri              : 
