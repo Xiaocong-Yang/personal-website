@@ -15,8 +15,8 @@ name                     : &name "Xiaocong Yang @ UIUC"
 description              : &description "CS PhD student at UIUC, advised by Prof. ChengXiang Zhai. Team leader of AI Interpretability @ Illinois."   # Update this with a general description of your site, this is the default if not overridden by a page
 url                      : https://xiaocong-yang.github.io # The base hostname & protocol for your site e.g. "https://[your GitHub username].github.io",
                                                           # or if you already have some other page hosted on Github then use "https://[your GitHub username].github.io/[Your Repo Name]"
-baseurl                  : "/personal-website" # the subpath of your site, e.g. "/blog"
-repository               : "Xiaocong-Yang/personal-website"
+baseurl                  : "" # the subpath of your site, e.g. "/blog"
+repository               : "Xiaocong-Yang/xiaocong-yang.github.io"
 
 # Calendar booking (used on homepage)
 calendar_booking_url     : "https://calendar.app.google/atFuesR4mGxEsFLs6" # Google Appointment Schedules booking page URL
