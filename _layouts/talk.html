@@ -72,16 +72,18 @@ layout: default
           {% for r in page.recording_urls %}
             {% assign entry_id = r | split: '/' | last %}
             <h3>Recording{% if page.recording_urls.size > 1 %} {{ forloop.index }}{% endif %}</h3>
-            <div class="embed-responsive">
-              <iframe src="https://mediaspace.illinois.edu/embed/secure/iframe/entryId/{{ entry_id }}/uiConfId/23448465" loading="lazy" allow="autoplay *; fullscreen *; encrypted-media *" allowfullscreen title="{{ page.title | markdownify | strip_html | strip_newlines }} recording{% if page.recording_urls.size > 1 %} {{ forloop.index }}{% endif %}"></iframe>
-            </div>
+            <a class="embed-responsive embed-responsive--video" href="{{ r }}" target="_blank" rel="noopener" aria-label="Watch recording{% if page.recording_urls.size > 1 %} {{ forloop.index }}{% endif %} for {{ page.title | markdownify | strip_html | strip_newlines }}">
+              <img src="https://cdnapisec.kaltura.com/p/1329972/sp/132997200/thumbnail/entry_id/{{ entry_id }}/width/400" alt="" loading="lazy">
+              <span class="embed-responsive__play" aria-hidden="true"><i class="fa fa-play-circle"></i></span>
+            </a>
           {% endfor %}
         {% elsif page.recording_url %}
           {% assign entry_id = page.recording_url | split: '/' | last %}
           <h3>Recording</h3>
-          <div class="embed-responsive">
-            <iframe src="https://mediaspace.illinois.edu/embed/secure/iframe/entryId/{{ entry_id }}/uiConfId/23448465" loading="lazy" allow="autoplay *; fullscreen *; encrypted-media *" allowfullscreen title="{{ page.title | markdownify | strip_html | strip_newlines }} recording"></iframe>
-          </div>
+          <a class="embed-responsive embed-responsive--video" href="{{ page.recording_url }}" target="_blank" rel="noopener" aria-label="Watch recording for {{ page.title | markdownify | strip_html | strip_newlines }}">
+            <img src="https://cdnapisec.kaltura.com/p/1329972/sp/132997200/thumbnail/entry_id/{{ entry_id }}/width/400" alt="" loading="lazy">
+            <span class="embed-responsive__play" aria-hidden="true"><i class="fa fa-play-circle"></i></span>
+          </a>
         {% endif %}
       </section>
 
