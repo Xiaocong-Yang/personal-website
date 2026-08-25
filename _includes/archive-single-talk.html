@@ -1,42 +1,48 @@
 {% include base_path %}
 
-{% if post.header.teaser %}
-  {% capture teaser %}{{ post.header.teaser }}{% endcapture %}
-{% else %}
-  {% assign teaser = site.teaser %}
-{% endif %}
-
 {% if post.id %}
   {% assign title = post.title | markdownify | remove: "<p>" | remove: "</p>" %}
 {% else %}
   {% assign title = post.title %}
 {% endif %}
 
-<div class="{{ include.type | default: "list" }}__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    {% if include.type == "grid" and teaser %}
-      <div class="archive__item-teaser">
-        <img src=
-          {% if teaser contains "://" %}
-            "{{ teaser }}"
-          {% else %}
-            "{{ teaser | prepend: "/images/" | prepend: base_path }}"
-          {% endif %}
-          alt="">
-      </div>
-    {% endif %}
+<div class="talk-card">
+  {% if post.slides_url %}
+    <a class="talk-card__thumb" href="{{ post.slides_url }}" target="_blank" rel="noopener" aria-label="View slides for {{ title }}">
+      <span class="talk-card__thumb-frame">
+        <iframe src="{{ post.slides_url | replace: '/pub?', '/embed?' }}" loading="lazy" tabindex="-1" aria-hidden="true" title="{{ title }} slide preview"></iframe>
+      </span>
+    </a>
+  {% endif %}
+
+  <div class="talk-card__body">
     <h2 class="archive__item-title" itemprop="headline">
-      {% if post.link %}
-        <a href="{{ post.link }}">{{ title }}</a> <a href="{{ base_path }}{{ post.url }}" rel="permalink"><i class="fa fa-link" aria-hidden="true" title="permalink"></i><span class="sr-only">Permalink</span></a>
-      {% else %}
-        <a href="{{ base_path }}{{ post.url }}" rel="permalink">{{ title }}</a>
-      {% endif %}
+      <a href="{{ base_path }}{{ post.url }}" rel="permalink">{{ title }}</a>
     </h2>
-    {% if post.read_time %}
-      <p class="page__meta"><i class="fa fa-clock" aria-hidden="true"></i> {% include read-time.html %}</p>
-    {% endif %}
-    {% if post.date %}<p class="page__meta"><i class="fa fa-clock" aria-hidden="true"></i> {{ post.date | date: '%B %d, %Y' }}</p>{% endif %}
-    {% if post.venue %}<p class="archive__item-excerpt" itemprop="description">{{post.type}}, {{ post.venue }},  {{post.location}} {% endif %}
+
+    <p class="page__meta talk-card__meta">
+      {%- if post.type -%}{{ post.type }}{%- endif -%}
+      {%- if post.venue %} &middot; {{ post.venue }}{% endif -%}
+      {%- if post.location %}, {{ post.location }}{% endif -%}
+      {%- if post.semester %} &middot; {{ post.semester }}
+      {%- elsif post.date %} &middot; <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %-d, %Y" }}</time>
+      {%- endif -%}
+    </p>
+
     {% if post.excerpt %}<p class="archive__item-excerpt" itemprop="description">{{ post.excerpt | markdownify }}</p>{% endif %}
-  </article>
+
+    <p class="talk-card__links">
+      {% if post.slides_url %}
+        <a class="talk-card__pill" href="{{ post.slides_url }}" target="_blank" rel="noopener"><i class="fa fa-fw fa-file-powerpoint-o" aria-hidden="true"></i> Slides</a>
+      {% endif %}
+      {% if post.recording_urls %}
+        {% for r in post.recording_urls %}
+          <a class="talk-card__pill" href="{{ r }}" target="_blank" rel="noopener"><i class="fa fa-fw fa-play-circle" aria-hidden="true"></i> Recording{% if post.recording_urls.size > 1 %} {{ forloop.index }}{% endif %}</a>
+        {% endfor %}
+      {% elsif post.recording_url %}
+        <a class="talk-card__pill" href="{{ post.recording_url }}" target="_blank" rel="noopener"><i class="fa fa-fw fa-play-circle" aria-hidden="true"></i> Recording</a>
+      {% endif %}
+      <a class="talk-card__pill talk-card__pill--ghost" href="{{ base_path }}{{ post.url }}"><i class="fa fa-fw fa-link" aria-hidden="true"></i> Details</a>
+    </p>
+  </div>
 </div>
