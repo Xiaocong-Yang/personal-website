@@ -8,7 +8,7 @@
 
 <div class="talk-card">
   {% if post.slides_url %}
-    <a class="talk-card__thumb" href="{{ post.slides_url }}" target="_blank" rel="noopener" aria-label="View slides for {{ title }}">
+    <a class="talk-card__thumb" href="{{ base_path }}{{ post.url }}" aria-label="View details for {{ title }}">
       <span class="talk-card__thumb-frame">
         <iframe src="{{ post.slides_url | replace: '/pub?', '/embed?' }}" loading="lazy" tabindex="-1" aria-hidden="true" title="{{ title }} slide preview"></iframe>
       </span>

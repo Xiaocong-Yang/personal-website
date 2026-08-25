@@ -32,10 +32,27 @@ layout: default
           {% endif %}
         {% if page.modified %}
           <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i>Date:</strong> <time datetime="{{ page.modified | date: "%Y-%m-%d" }}">{{ page.modified | date: "%B %d, %Y" }}</time></p>
+        {% elsif page.semester %}
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i>Date:</strong> {{ page.semester }}</p>
         {% elsif page.date %}
           <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i>Date:</strong> <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %d, %Y" }}</time></p>
         {% endif %}
-        {% if page.talk_type %}<p>{{page.talk_type}} at {{ page.venue }},  {{page.location}} {% endif %}
+        {% if page.type %}<p>{{ page.type }} at {{ page.venue }}, {{ page.location }}</p>{% endif %}
+
+        {% if page.slides_url or page.recording_urls or page.recording_url %}
+          <p class="talk-card__links">
+            {% if page.slides_url %}
+              <a class="talk-card__pill" href="{{ page.slides_url }}" target="_blank" rel="noopener"><i class="fa fa-fw fa-file-powerpoint-o" aria-hidden="true"></i> Slides</a>
+            {% endif %}
+            {% if page.recording_urls %}
+              {% for r in page.recording_urls %}
+                <a class="talk-card__pill" href="{{ r }}" target="_blank" rel="noopener"><i class="fa fa-fw fa-play-circle" aria-hidden="true"></i> Recording{% if page.recording_urls.size > 1 %} {{ forloop.index }}{% endif %}</a>
+              {% endfor %}
+            {% elsif page.recording_url %}
+              <a class="talk-card__pill" href="{{ page.recording_url }}" target="_blank" rel="noopener"><i class="fa fa-fw fa-play-circle" aria-hidden="true"></i> Recording</a>
+            {% endif %}
+          </p>
+        {% endif %}
 
         </header>
       {% endunless %}
